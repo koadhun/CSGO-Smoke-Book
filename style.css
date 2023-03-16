@@ -1,0 +1,52 @@
+#map-grid {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.map-card {
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    flex-basis: 20%;
+    text-decoration: none;
+    color: black;
+}
+
+.map-card > img {
+    filter: grayscale(90%);
+    transition: filter 0.3s;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.map-card > p {
+    text-align: center;
+    font-weight: normal;
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+.map-card:hover {
+    transition: all 0.2s ease;
+    transform: scale(1.1);
+}
+
+.map-card:hover > img {
+    opacity: 100%;
+    filter: grayscale(0%);
+}
+
+.map-card:hover > p {
+    font-weight: bold;
+}
+
+
