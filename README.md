@@ -1,4 +1,4 @@
-# CSGO-Smoke-Book
+# CSGO SmokeBook 
 This project is being created for Counter-Strike: Global Offensive players. <br>
 <br>
 Users can select maps and map parts they want to smoke. <br>
