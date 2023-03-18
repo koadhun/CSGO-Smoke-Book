@@ -10,21 +10,41 @@ TODOs:
 -Add a background image for the body
 */
 
+class Spot {
+    constructor(mapName, spotTitle, spotName, spotImageNumber){
+        this.mapName = mapName;
+        this.spotTitle = spotTitle;
+        this.spotName = spotName;
+        this.spotImageNumber = spotImageNumber;
+    }
+
+    getMapName() {
+        return mapName;
+    }
+
+    getSpotTitle() {
+        return spotTitle;
+    }
+
+    getSpotName() {
+        return spotName;
+    }
+
+    getSpotImageNumber() {
+        return spotImageNumber;
+    }
+
+    getImageSrc() {
+        return `smokes/${mapName}/${spotName}${spotImageNumber}.jpg`
+    }
+}
+
 const params = new URLSearchParams(window.location.search)
 const index = params.get('index')
 const smokeVideoDiv = document.getElementById('smokeVideo')
 const lineupHeader = document.getElementById('lineup-header')
 
 const body = document.querySelector('body')
-
-let maps = ['mirage', 'inferno', 'overpass', 'vertigo', 'nuke', 'ancient', 'dust2', 'anubis']
-let infernoSpots = []
-let overpassSpots = []
-let vertigoSpots = []
-let nukeSpots = []
-let ancientSpots = []
-let dust2Spots = createDust2Spots()
-let anubisSpots = []
 
 const createDust2Spots = () => {
     const bDoors = new Spot('dust2','B DOORS', 'b-doors', 4)
@@ -40,6 +60,16 @@ const createDust2Spots = () => {
     const xboxLowerTunnel = new Spot('dust2', 'XBOX | LOWER TUNNEL', 'xbox-lower-tunnel', 4)
     const xboxTspawn = new Spot('dust2', 'XBOX | T SPAWN', 'xbox-t-spawn', 4)
 }
+let dust2Spots = createDust2Spots()
+
+let maps = ['mirage', 'inferno', 'overpass', 'vertigo', 'nuke', 'ancient', 'dust2', 'anubis']
+let infernoSpots = []
+let overpassSpots = []
+let vertigoSpots = []
+let nukeSpots = []
+let ancientSpots = []
+let anubisSpots = []
+
 
 /* 
 detailsContent
@@ -88,7 +118,7 @@ const loadImages = (imageSrc, numberOfPictures) => {
     detailsDiv.style.display = 'block'
 
     removeChildElements()
-    createImages(maps[index],imageSrc, numberOfPictures)
+    createImages('dust2',imageSrc, numberOfPictures)
     fullScreenElements()
 }
 
@@ -233,31 +263,3 @@ window.addEventListener('resize', () => {
 
 updateWidth();
 
-class Spot {
-    constructor(mapName, spotTitle, spotName, spotImageNumber){
-        this.mapName = mapName;
-        this.spotTitle = spotTitle;
-        this.spotName = spotName;
-        this.spotImageNumber = spotImageNumber;
-    }
-
-    getMapName() {
-        return mapName;
-    }
-
-    getSpotTitle() {
-        return spotTitle;
-    }
-
-    getSpotName() {
-        return spotName;
-    }
-
-    getSpotImageNumber() {
-        return spotImageNumber;
-    }
-
-    getImageSrc() {
-        return `smokes/${mapName}/${spotName}${spotImageNumber}.jpg`
-    }
-}
