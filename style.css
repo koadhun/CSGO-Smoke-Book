@@ -6,7 +6,6 @@
     flex-direction: row;
     justify-content: flex-start;
     flex-wrap: wrap;
-    cursor: pointer;
 }
 
 .map-card {
@@ -19,6 +18,7 @@
     flex-basis: 20%;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 .map-card > img {
@@ -26,6 +26,7 @@
     transition: filter 0.3s;
     border-radius: 10px;
     width: 100%;
+    height: 200px;
 }
 
 .map-card > p {
@@ -49,4 +50,99 @@
     font-weight: bold;
 }
 
+/* STYLING FOR MAP DETAILS */
 
+#main-content {
+    margin: 30px;
+}
+
+#detailsContent {
+    display: hidden;
+}
+
+.slider-wrapper {
+    overflow-x: hidden;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.mapDetailCard {
+    border: 1px solid #555;
+    border-radius: 5px;
+    flex: 0 0 200px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.prev-button, .next-button {
+   flex: 0 0 50px;
+   height: 150px;
+   border: none;
+   background-color: none;
+   font-size: 20px;
+   cursor: pointer;
+}
+
+.prev-button {
+    order: -1;
+    margin-right: 20px;
+}
+
+.prev-button:hover, .next-button:hover {
+    background-color: #ccc;
+}
+
+
+.mapDetailCard:hover {
+    cursor: pointer;
+}
+
+.mapDetailCard > p{
+    margin: 5px;
+}
+.mapDetailCard > img {
+    width: 300px;
+    height: 250px;
+}
+
+#smokePositions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+#smokeVideo {
+    margin-top: 20px;
+    display: none;
+}
+
+.smokeImage {
+    width: 350px;
+    height: 275px;
+    cursor: pointer;
+}
+
+.smokeImage:hover {
+    transition: all 0.2s ease;
+    transform: scale(1.1);
+}
+
+#lineup-header {
+    display: none;
+}

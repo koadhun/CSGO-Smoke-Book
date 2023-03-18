@@ -1,34 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Map</title>
-</head>
-<body>
-    <p>Hello to map details</p>
-    <p>The selected map is: xy</p>
-    <p>Choose a position to smoke:</p>
-    <div id="mapPartsRow">
-        <div id="mapDetailCard">
-            <img src="" alt="">
-            <p></p>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Map</title>
+    </head>
+    <body>
+    <div id="main-content">
+        <div id="detailsContent">
+            <h2 id="lineup-header">Smoke lineup:</h2>
+            <!--
+                Build should be the same as the slider below for map parts.
+                <div id="smokePositions">
+                <img src="" alt="" class = 'smokeImage fullscreen-image'>
+                <img src="" alt="" class = 'smokeImage fullscreen-image'>
+                <img src="" alt="" class = 'smokeImage fullscreen-image'>
+                <img src="" alt="" class = 'smokeImage fullscreen-image'>
+            </div>
+            <div id="smokeVideo">
+        
+            </div>
+            -->
+            <!-- Build this part in JS
+            ---- Images and videos/GIFs should load depending on:
+            ---- What map was selected AND which map part was selected
+            ---- Should look something like this:
+            ---- Image slider with pictures of positions
+            ---- Pictures should include text like: Crouch + Throw
+            ---- Or Jump + Throw Or Walk + Throw OR Throw etc.
+            ---- Under the picture slider there should be a GIF
+            ---- or a short youtube video -->
         </div>
-    </div>
-    <div id="detailsContent">
-        <!-- Build this part in JS
-        ---- Images and videos/GIFs should load depending on:
-        ---- What map was selected AND which map part was selected
-        ---- Should look something like this:
-        ---- Image slider with pictures of positions
-        ---- Pictures should include text like: Crouch + Throw
-        ---- Or Jump + Throw Or Walk + Throw OR Throw etc.
-        ---- Under the picture slider there should be a GIF
-        ---- or a short youtube video -->
+        <h2>Choose a position to smoke:</h2>
+        <div class="slider-wrapper">  
+            <div class="slider-container">
+                <button class="prev-button">&lt;</button>  
+                <div class="slider-track">
+                    <div id="b-doors" class="mapDetailCard">
+                        <img src="smokes/dust2/b-doors4.jpg" alt="">
+                        <p class="positionName">B DOORS</p>
+                    </div>
+                    <div id="b-window" class="mapDetailCard">
+                        <img src="smokes/dust2/b-window4.jpg" alt="">
+                        <p class="positionName">B WINDOW</p>
+                    </div>
+                    <div id="long-corner" class="mapDetailCard">
+                        <img src="smokes/dust2/long-corner4.jpg" alt="">
+                        <p class="positionName">LONG CORNER</p>
+                    </div>
+                    <div id="pit" class="mapDetailCard">
+                        <img src="smokes/dust2/pit4.jpg" alt="">
+                        <p class="positionName">PIT</p>
+                    </div>
+                    <div id="long-push-ct" class="mapDetailCard">
+                        <img src="smokes/dust2/long-push-ct4.jpg" alt="">
+                        <p class="positionName">CT | LONG PUSH</p>
+                    </div>
+                    <div id="mid-to-b" class="mapDetailCard">
+                        <img src="smokes/dust2/mid-to-b4.jpg" alt="">
+                        <p class="positionName">CT | MID TO B</p>
+                    </div>
+                    <div id="short-from-long" class="mapDetailCard">
+                        <img src="smokes/dust2/short-from-long4.jpg" alt="">
+                        <p class="positionName">SHORT | LONG PUSH</p>
+                    </div>
+                    <div id="short-one-way" class="mapDetailCard">
+                        <img src="smokes/dust2/short-one-way4.jpg" alt="">
+                        <p class="positionName">SHORT | ONE WAY</p>
+                    </div>
+                    <div id="short-push-ct" class="mapDetailCard">
+                        <img src="smokes/dust2/short-push-ct4.jpg" alt="">
+                        <p class="positionName">CT | SHORT PUSH</p>
+                    </div>
+                    <div id="tunnel-mid" class="mapDetailCard">
+                        <img src="smokes/dust2/tunnel-mid4.jpg" alt="">
+                        <p class="positionName">TUNNEL | MID RETAKE</p>
+                    </div>
+                    <div id="xbox-t-spawn" class="mapDetailCard">
+                        <img src="smokes/dust2/xbox-t-spawn4.jpg" alt="">
+                        <p class="positionName">XBOX | T SPAWN</p>
+                    </div>
+                    <div id="xbox-lower-tunnel" class="mapDetailCard">
+                        <img src="smokes/dust2/xbox-lower-tunnel4.jpg" alt="">
+                        <p class="positionName">XBOX | LOWER TUNNEL</p>
+                    </div>
+                </div>
+                <button class="next-button">&gt;</button>
+            </div>
+        </div>
+        
+        <div id="smokeVideo">
+            <iframe 
+              src="" 
+              frameborder="0"
+              id="setupVideo"
+              height="300"
+              width="600"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              ></iframe>
+        </div>
+
+        <a href="index.html"><p>Go back to Map selection</p></a>
     </div>
 
-    <a href="index.html"><p>Go back to Map selection</p></a>
+    <script src="script.js"></script>
 </body>
 </html>
