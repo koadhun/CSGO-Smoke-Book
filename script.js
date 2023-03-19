@@ -85,29 +85,37 @@ Indexes:
 const createCorrectMapParts = (selectedIndex) => {
     if(selectedIndex == 0) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createMirageSpots()
     } else if(selectedIndex == 1) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createInfernoSpots()
     } else if(selectedIndex == 2) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createOverpassSpots()
     } else if(selectedIndex == 3) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createVertigoSpots()
     } else if(selectedIndex == 4) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createNukeSpots()
     } else if(selectedIndex == 5) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createAncientSpots()
     } else if(selectedIndex == 6) {
         createDust2Spots()
     } else if(selectedIndex == 7) {
         alert("Work in progess... Check back later!")
+        window.location.href = "index.html"
         // createAnubisSpots()
     } else {
         alert("Something went wrong. Please try again later.")
+        window.location.href = "index.html"
     }
 }
 
