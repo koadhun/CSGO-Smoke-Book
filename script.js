@@ -7,20 +7,11 @@ TODOs:
 -Modify the smoke lineups UI to be scrollable like the map parts part of the UI.
 -Add a background image for the body
 */
-class Spot {
-    constructor(mapName, spotTitle, spotName, spotImageNumber){
-        this.mapName = mapName;
-        this.spotTitle = spotTitle;
-        this.spotName = spotName;
-        this.spotImageNumber = spotImageNumber;
-    }
-}
-
-/* To be able to determine which map was selected by the user.
- * Information passed by index.js
-*/
 const params = new URLSearchParams(window.location.search)
-const index = params.get('index')
+const smokeId = params.get('smokeId')
+
+const bigImage = document.getElementById('big-image')
+
 
 /* DOM elements to show smokePositions (smoke lineups) on top of the screen */
 const lineupHeader = document.getElementById('lineup-header')
@@ -35,121 +26,9 @@ const iframe = document.getElementById('setupVideo')
 //iframe.src = 'https://www.youtube.com/embed/OokgEC8AFoo'
 // detailsDiv.appendChild(smokeVideoDiv)
 
-/* To show map part elements below smokePositions and the tutorial video (tutorial video not included yet.) */
-const container = document.querySelector('.slider-container');
-const track = document.querySelector('.slider-track');
-const items = Array.from(document.querySelectorAll('.mapDetailCard'));
-const prevBtn = document.querySelector('.prev-button');
-const nextBtn = document.querySelector('.next-button');
-
-
-let infernoSpots = []
-let overpassSpots = []
-let vertigoSpots = []
-let nukeSpots = []
-let ancientSpots = []
-let anubisSpots = []
-let dust2Spots = []
-
-const createDust2Spots = () => {
-    dust2Spots.push(new Spot('dust2','B DOORS', 'b-doors', 4))
-    dust2Spots.push(new Spot('dust2', 'B WINDOW', 'b-window', 4))
-    dust2Spots.push(new Spot('dust2', 'LONG CORNER', 'long-corner', 4))
-    dust2Spots.push(new Spot('dust2', 'CT | FROM LONG', 'long-push-ct', 4))
-    dust2Spots.push(new Spot('dust2', 'MID TO B', 'mid-to-b', 4))
-    dust2Spots.push(new Spot('dust2', 'PIT', 'pit', 4))
-    dust2Spots.push(new Spot('dust2', 'SHORT | FROM LONG', 'short-from-long', 4))
-    dust2Spots.push(new Spot('dust2', 'SHORT ONE WAY', 'short-one-way', 5))
-    dust2Spots.push(new Spot('dust2', 'CT | FROM SHORT', 'short-push-ct', 5))
-    dust2Spots.push(new Spot('dust2', 'TUNNEL | FROM MID', 'tunnel-mid', 5))
-    dust2Spots.push(new Spot('dust2', 'XBOX | LOWER TUNNEL', 'xbox-lower-tunnel', 4))
-    dust2Spots.push(new Spot('dust2', 'XBOX | T SPAWN', 'xbox-t-spawn', 4))
-}
-
-/*
-Indexes:
-1: mirage
-2: inferno
-3: overpass
-4: vertigo
-5: nuke
-6: ancient
-7: dust2
-8: anubis
-*/ 
-
-/* Loading data only into the necessary array.
- * Alerting the user if the selected map is not available yet.
- * selectedIndex comes from the index coming from index.js 
- */
-const createCorrectMapParts = (selectedIndex) => {
-    if(selectedIndex == 0) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createMirageSpots()
-    } else if(selectedIndex == 1) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createInfernoSpots()
-    } else if(selectedIndex == 2) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createOverpassSpots()
-    } else if(selectedIndex == 3) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createVertigoSpots()
-    } else if(selectedIndex == 4) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createNukeSpots()
-    } else if(selectedIndex == 5) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createAncientSpots()
-    } else if(selectedIndex == 6) {
-        createDust2Spots()
-    } else if(selectedIndex == 7) {
-        alert("Work in progess... Check back later!")
-        window.location.href = "index.html"
-        // createAnubisSpots()
-    } else {
-        alert("Something went wrong. Please try again later.")
-        window.location.href = "index.html"
-    }
-}
-
-createCorrectMapParts(index)
-
-/* Dynamically creating map parts cards 
-Class: .mapDetailCard, id: Spot.spotName
-Append each card to .slider-track
-*/
-const createMapPartDivs = (selectedMap) => {
-    selectedMap.forEach((map) => {
-        let cardDiv = document.createElement('div')
-        cardDiv.classList.add('mapDetailCard')
-        cardDiv.id = map.spotName
-
-        let spotImage = document.createElement('img')
-        spotImage.src = `smokes/${map.mapName}/${map.spotName}${map.spotImageNumber}.jpg`
-        cardDiv.appendChild(spotImage)
-
-        let spotName = document.createElement('p')
-        spotName.classList.add('positionName')
-        spotName.innerText = map.spotTitle
-
-        cardDiv.appendChild(spotName)
-
-        cardDiv.addEventListener('click', () => {
-            loadImages(map)
-        })
-
-        track.appendChild(cardDiv)
-    })
-}
-
-createMapPartDivs(dust2Spots)
+/* Get JSON object from minimap.js */
+const spotItem = localStorage.getItem('spotToLoad')
+const mySpot = JSON.parse(spotItem)
 
 /*
  * This function calls all the necessary functions to create the smoke lineup UI
@@ -158,6 +37,8 @@ createMapPartDivs(dust2Spots)
 const loadImages = (map) => {
     lineupHeader.style = "display: block;"
     detailsDiv.style.display = 'block'
+
+    bigImage.src = `smokes/${map.mapName}/${map.spotName}1.jpg`
 
     removeChildElements()
     createImages(map)
@@ -186,6 +67,16 @@ const createImages = (map) => {
  * This function is responsible for handling event listeners regarding making the smoke lineup images full screen.
  * Including click and keydown events.
 */
+
+
+/*  TODO: Modify the code below as the following:
+ Make the small images to a slider container like in minimap.html
+ If a small image is clicked, then change bigImage src to the small image src.
+ If the bigImage is clicked, then request fullscreen.
+ In fullscreen, be able to close fullscreen with click or 'esc' keydown.
+ Also be able to step to next and previous images with right and left keydown events.
+ If the image is not in fullscreen, then left and right keydown events should step to the next small image.
+ Meaning that the bigImage src should change on these keydown events. */
 const fullScreenElements = () => {
     // get all the images on the page
     const images = document.querySelectorAll('.fullscreen-image')
@@ -193,11 +84,14 @@ const fullScreenElements = () => {
 
     // add click event listener to each image
     images.forEach((image, index) => {
-        image.addEventListener('click', () => toggleFullScreen(index))
+       // image.addEventListener('click', () => toggleFullScreen(index))
+       image.addEventListener('click', () => bigImage.src = image.src)
     })
 
+    bigImage.addEventListener('click', toggleFullScreen())
+
     // function to toggle fullscreen mode
-    function toggleFullScreen(index) {
+    function toggleFullScreen() {
         if (!document.fullscreenElement) {
             currentImageIndex = index
             // if not in fullscreen mode, go into fullscreen mode
@@ -236,45 +130,4 @@ const removeChildElements = () => {
     }
 }
 
-let slidePosition = 0;
-let itemsVisible = 0;
-
-/*
- * Calculating container and item width, in this case only the items that fits the screen will be visible.
-*/
-function updateWidth() {
-  const containerWidth = container.getBoundingClientRect().width;
-  const itemWidth = items[0].getBoundingClientRect().width;
-  const itemMargin = parseFloat(window.getComputedStyle(items[0]).marginRight);
-  const itemsPerScreen = Math.floor(containerWidth / (itemWidth + itemMargin));
-  const totalWidth = (itemWidth + itemMargin) * items.length;
-  const trackWidth = (itemWidth + itemMargin) * itemsPerScreen;
-
-  itemsVisible = itemsPerScreen;
-  track.style.width = `${totalWidth}px`;
-  track.style.transform = `translateX(${slidePosition}px)`;
-  container.style.overflowX = 'hidden';
-  container.style.position = 'relative';
-  track.style.position = 'relative';
-  track.style.display = 'flex';
-  track.style.transition = 'transform 0.3s ease-in-out';
-  track.style.willChange = 'transform';
-  track.style.width = `${trackWidth}px`;
-}
-
-// Click event listener on the 'Next' button. Scrolling to the next item on each click.
-nextBtn.addEventListener('click', () => {
-    track.scrollBy({ left: 310, behavior: 'smooth' });
-  });
-
-// Click event listener on the 'Prev' button. Scrolling to the previous item on each click.
-prevBtn.addEventListener('click', () => {
-    track.scrollBy({ left: -310, behavior: 'smooth' });
-  });
-
-window.addEventListener('resize', () => {
-  updateWidth();
-});
-
-updateWidth();
-
+loadImages(mySpot)

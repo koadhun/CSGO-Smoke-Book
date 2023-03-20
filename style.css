@@ -138,11 +138,15 @@
     cursor: pointer;
 }
 
-.smokeImage:hover {
-    transition: all 0.2s ease;
-    transform: scale(1.1);
-}
-
 #lineup-header {
     display: none;
+}
+
+area[shape="circle"] {
+    cursor: pointer;
+}
+
+#big-image {
+    width: 80%;
+    height: 500px;
 }
