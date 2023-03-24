@@ -3,7 +3,6 @@ TODOs:
 -Clean style.css
 -Put the smokes folder into the images folder - modify src of the images. New src should start with images/smokes/...
 -Create map spots for all maps.
--Add tutorial video below the smoke lineups
 -Modify the smoke lineups UI to be scrollable like the map parts part of the UI.
 -Add a background image for the body
 */
@@ -12,19 +11,18 @@ const smokeId = params.get('smokeId')
 
 const bigImage = document.getElementById('big-image')
 
-
 /* DOM elements to show smokePositions (smoke lineups) on top of the screen */
 const lineupHeader = document.getElementById('lineup-header')
 const detailsDiv = document.getElementById('detailsContent')
 const smokePositions = document.createElement('div')
-smokePositions.id = 'smokePositions'
+smokePositions.classList.add('smokePositions')
 
-/* For tutorial video below smokePositions div (not included yet.) */
+/* For tutorial video below smokePositions div */
 const smokeVideoDiv = document.getElementById('smokeVideo')
 const iframe = document.getElementById('setupVideo')
-// Hard coded a video to test embedding
+
 //iframe.src = 'https://www.youtube.com/embed/OokgEC8AFoo'
-// detailsDiv.appendChild(smokeVideoDiv)
+
 
 /* Get JSON object from minimap.js */
 const spotItem = localStorage.getItem('spotToLoad')
@@ -64,56 +62,38 @@ const createImages = (map) => {
 }
 
 /* 
- * This function is responsible for handling event listeners regarding making the smoke lineup images full screen.
- * Including click and keydown events.
+ * This function is responsible for handling event listeners regarding entering full screen mode and changing images with key events.
 */
-
-
-/*  TODO: Modify the code below as the following:
- Make the small images to a slider container like in minimap.html
- If a small image is clicked, then change bigImage src to the small image src.
- If the bigImage is clicked, then request fullscreen.
- In fullscreen, be able to close fullscreen with click or 'esc' keydown.
- Also be able to step to next and previous images with right and left keydown events.
- If the image is not in fullscreen, then left and right keydown events should step to the next small image.
- Meaning that the bigImage src should change on these keydown events. */
 const fullScreenElements = () => {
-    // get all the images on the page
     const images = document.querySelectorAll('.fullscreen-image')
     let currentImageIndex = 0
 
-    // add click event listener to each image
-    images.forEach((image, index) => {
-       // image.addEventListener('click', () => toggleFullScreen(index))
+    images.forEach((image) => {
        image.addEventListener('click', () => bigImage.src = image.src)
     })
 
-    bigImage.addEventListener('click', toggleFullScreen())
+    bigImage.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        bigImage.requestFullscreen()
+      } else {
+          document.exitFullscreen()
+      }
+    })
 
-    // function to toggle fullscreen mode
-    function toggleFullScreen() {
-        if (!document.fullscreenElement) {
-            currentImageIndex = index
-            // if not in fullscreen mode, go into fullscreen mode
-            images[currentImageIndex].requestFullscreen()
-        } else {
-            // if in fullscreen mode, exit fullscreen mode
-            document.exitFullscreen()
-        }
-    }
-
-    // add keydown event listener to exit fullscreen mode when pressing "Escape" key
+    /* Keydown event to change image display.
+     * On 'Escape' keydown: exits full screen mode, if the image was opened in full screen. 
+     * On 'ArrowRight' (right arrow key): changes bigImage source to the next image. Can be done in full screen mode and non-full screen mode.
+     * On 'ArrowLeft' (left arrow key): changes bigImage source to the previous image. Can be done in full screen mode and non-full screen mode.
+     * */
     document.addEventListener('keydown', event => {
         if (event.key === 'Escape' && document.fullscreenElement) {
             document.exitFullscreen()
-        } else if(document.fullscreenElement) {
-            if(event.key === 'ArrowRight') {
-                currentImageIndex = (currentImageIndex + 1) % images.length // % added to handle wrapping around when we reach the end of the image array
-                images[currentImageIndex].requestFullscreen()
-            } else if(event.key === 'ArrowLeft') {
-                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // % added to handle wrapping around when we reach the beginning of the image array.
-                images[currentImageIndex].requestFullscreen()
-            }
+        } else if(event.key === 'ArrowRight') {
+                currentImageIndex = (currentImageIndex + 1) % images.length // '%' added to handle wrapping around when we reach the end of the image array
+                bigImage.src = images[currentImageIndex].src
+        } else if(event.key === 'ArrowLeft') {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length; // '%' added to handle wrapping around when we reach the beginning of the image array.
+                bigImage.src = images[currentImageIndex].src
         }
     })
 }

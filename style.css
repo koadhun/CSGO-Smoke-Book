@@ -119,17 +119,17 @@
     height: 250px;
 }
 
-#smokePositions {
+.smokePositions {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: flex-start;
+    overflow-x: hidden;
+    flex-wrap: nowrap;
     gap: 20px;
 }
 
 #smokeVideo {
     margin-top: 20px;
-    display: none;
+    display: block;
 }
 
 .smokeImage {
@@ -146,7 +146,15 @@ area[shape="circle"] {
     cursor: pointer;
 }
 
+#top-image {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 #big-image {
     width: 80%;
     height: 500px;
+    cursor: pointer;
+    aspect-ratio: 16/9;
 }

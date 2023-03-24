@@ -66,11 +66,6 @@ const createMapPartDivs = (selectedMap) => {
         cardDiv.appendChild(spotName)
 
         cardDiv.addEventListener('click', () => {
-            //Have to pass the Spot object somehow. Or map name, number of pictures, and smoke name.
-            /* const myObject = { mapName: map.mapName, spotName: map.spotName, spotImageNumber: map.spotImageNumber }
-            const myObjectString = JSON.stringify(myObject)
-            localStorage.setItem('spotToLoad', myObjectString)
-            window.location.href = "mapdetails.html" */
             spotToStorageAndRedirection(map)
         })
 
